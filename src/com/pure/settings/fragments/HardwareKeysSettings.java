@@ -44,7 +44,9 @@ public class HardwareKeysSettings extends ActionFragment implements OnPreference
     // Key Disabler
     private static final String HWKEY_DISABLE = "hardware_keys_disable";
 
+    // Buttons Brightness
     private static final String KEY_BACKLIGHT_TIMEOUT = "backlight_timeout";
+    private static final String KEY_BUTTON_BRIGHTNESS = "button_brightness";
 
     // category keys
     private static final String CATEGORY_HWKEY = "hardware_keys";
@@ -68,6 +70,7 @@ public class HardwareKeysSettings extends ActionFragment implements OnPreference
 
     private ListPreference mBacklightTimeout;
     private SwitchPreference mHwKeyDisable;
+    private SwitchPreference mButtonBrightness;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,6 +104,14 @@ public class HardwareKeysSettings extends ActionFragment implements OnPreference
 
          }
          
+        mButtonBrightness = (SwitchPreference) findPreference(KEY_BUTTON_BRIGHTNESS);
+        if (mButtonBrightness != null) { 
+             mButtonBrightness.setChecked((Settings.System.getInt(getContentResolver(),
+             Settings.System.BUTTON_BRIGHTNESS, 1) == 1));
+             mButtonBrightness.setOnPreferenceChangeListener(this);
+
+        }
+        
         // bits for hardware keys present on device
         final int deviceKeys = getResources().getInteger(
                 com.android.internal.R.integer.config_deviceHardwareKeys);
@@ -125,9 +136,10 @@ public class HardwareKeysSettings extends ActionFragment implements OnPreference
         final PreferenceCategory appSwitchCategory =
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_APPSWITCH);
 
-         // Backlight timout
+         // Button Backlight
         if (!hasMenuKey || !hasHomeKey) {
              prefScreen.removePreference(mBacklightTimeout);
+             prefScreen.removePreference(mButtonBrightness);
          }
          
         // back key
@@ -190,6 +202,11 @@ public class HardwareKeysSettings extends ActionFragment implements OnPreference
              mBacklightTimeout
                      .setSummary(mBacklightTimeout.getEntries()[BacklightTimeoutIndex]);
              return true;
+        } else if (preference == mButtonBrightness) {
+             boolean value = (Boolean) newValue;
+             Settings.System.putInt(getActivity().getContentResolver(),
+                      Settings.System.BUTTON_BRIGHTNESS, value ? 1 : 0);
+             return true;	
             }
             return false;
     }
