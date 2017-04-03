@@ -48,9 +48,9 @@
         android:title="@string/pure_buttons">
 
         <PreferenceScreen
-            android:fragment="com.pure.settings.fragments.ButtonsSettings"
-            android:key="pure_buttons_settings"
-            android:title="@string/pure_buttons"/>
+            android:key="pure_hardware_keys_settings"
+            android:title="@string/hardware_keys_settings_title"
+            android:fragment="com.pure.settings.fragments.HardwareKeysSettings" />
 
         <PreferenceScreen
             android:fragment="com.pure.settings.fragments.NavBarSettings"
