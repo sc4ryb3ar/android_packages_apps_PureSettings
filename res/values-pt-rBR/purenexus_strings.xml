@@ -493,4 +493,7 @@
   <string name="backlight_timeout_30s">30 segundos</string>
   <!-- Enable keys backlight-->
   <string name="button_brightness_title">Ativar iluminação</string>
+  <!-- Navbar dynamic color -->
+  <string name="nav_bar_dynamic_title">Cor dinâmica da barra de navegação</string>
+  <string name="nav_bar_dynamic_summary">Ativar ou desativar para a barra de navegação se adaptar a cor escura primária do aplicativo atual. Reinicie o aplicativo desejado para ver o efeito</string>
 </resources>
