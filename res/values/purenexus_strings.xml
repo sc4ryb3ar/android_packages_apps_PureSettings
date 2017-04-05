@@ -530,4 +530,7 @@
     <!-- Ticker-->
     <string name="ticker_title">Ticker</string>
     <string name="ticker_summary">Enable the old status bar notification ticker. Heads Up will be disabled if you enable this option.</string>
+
+    <!-- OTA Updates-->
+    <string name="ota_title">PureNexus updates</string>
 </resources>
