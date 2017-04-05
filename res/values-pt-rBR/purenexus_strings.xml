@@ -499,4 +499,6 @@
    <!-- Ticker-->
   <string name="ticker_title">Ticker de notificação</string>
   <string name="ticker_summary">Ativar o ticker antigo da barra de status</string>
+  <!-- OTA Updates-->
+  <string name="ota_title">Atualizações PureNexus</string>
 </resources>
