@@ -498,7 +498,7 @@
   <string name="nav_bar_dynamic_summary">Ativar ou desativar para a barra de navegação se adaptar a cor escura primária do aplicativo atual. Reinicie o aplicativo desejado para ver o efeito</string>
    <!-- Ticker-->
   <string name="ticker_title">Ticker de notificação</string>
-  <string name="ticker_summary">Ativar o ticker antigo da barra de status</string>
+  <string name="ticker_summary">Ativar o ticker antigo da barra de status, as notificações heads-up serão desativadas caso você ative esta opção.</string>
   <!-- OTA Updates-->
   <string name="ota_title">Atualizações PureNexus</string>
 </resources>
