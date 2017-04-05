@@ -17,7 +17,10 @@
 package com.pure.settings.fragments;
 
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
@@ -42,6 +45,8 @@ public class NavBarSettings extends SettingsPreferenceFragment
     private SwitchPreference mNavbarVisibility;
 
     private CustomSeekBarPreference mLongpressKillDelay;
+
+    private static final String INTENT_RESTART_SYSTEMUI = "restart_systemui";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,6 +87,7 @@ public class NavBarSettings extends SettingsPreferenceFragment
             Settings.Secure.putInt(getContentResolver(), Settings.Secure.NAVIGATION_BAR_VISIBLE,
                     showing ? 1 : 0);
             mNavbarVisibility.setChecked(showing);
+            getActivity().getApplicationContext().sendBroadcastAsUser(new Intent(INTENT_RESTART_SYSTEMUI), new UserHandle(UserHandle.USER_ALL));
             return true;
         }
         return false;
