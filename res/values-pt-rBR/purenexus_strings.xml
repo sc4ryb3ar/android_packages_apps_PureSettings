@@ -469,7 +469,7 @@
   <string name="action_entry_select_app">Selecione o aplicativo</string>
   <string name="action_entry_custom_action">Selecionar ação personalizada</string>
   <!-- Hardware button navigation -->
-  <string name="hardware_keys_settings_title">Hardware Keys</string> 
+  <string name="hardware_keys_settings_title">Teclas físicas</string> 
   <string name="hardware_keys_home_key_title">Botão de início</string>
   <string name="hardware_keys_menu_key_title">Botão de menu</string>
   <string name="hardware_keys_assist_key_title">Botão de pesquisa</string>
@@ -496,4 +496,7 @@
   <!-- Navbar dynamic color -->
   <string name="nav_bar_dynamic_title">Cor dinâmica da barra de navegação</string>
   <string name="nav_bar_dynamic_summary">Ativar ou desativar para a barra de navegação se adaptar a cor escura primária do aplicativo atual. Reinicie o aplicativo desejado para ver o efeito</string>
+   <!-- Ticker-->
+  <string name="ticker_title">Ticker de notificação</string>
+  <string name="ticker_summary">Ativar o ticker antigo da barra de status</string>
 </resources>
