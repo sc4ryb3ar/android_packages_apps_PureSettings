@@ -16,6 +16,7 @@
 
 package com.pure.settings.fragments;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.preference.PreferenceScreen;

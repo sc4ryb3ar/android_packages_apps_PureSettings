@@ -22,14 +22,22 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.internal.utils.du.DUActionUtils;
 
 public class PureSettings extends SettingsPreferenceFragment {
+
+    private static final String CATEGORY_HWKEY = "pure_hardware_keys_settings";
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.pure_settings_main);
         PreferenceScreen prefScreen = getPreferenceScreen();
+        final PreferenceScreen hwkeyCat = (PreferenceScreen) prefScreen.findPreference(CATEGORY_HWKEY);
+        final boolean needsNavbar = DUActionUtils.hasNavbarByDefault(getActivity());
+        if (needsNavbar) {
+            prefScreen.removePreference(hwkeyCat);
+        }
     }
 
     @Override

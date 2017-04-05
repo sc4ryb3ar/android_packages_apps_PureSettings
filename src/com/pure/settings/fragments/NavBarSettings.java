@@ -19,6 +19,7 @@ package com.pure.settings.fragments;
 import android.content.ContentResolver;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
@@ -29,11 +30,16 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 import com.pure.settings.preferences.CustomSeekBarPreference;
+import com.android.internal.utils.du.DUActionUtils;
 
 public class NavBarSettings extends SettingsPreferenceFragment
          implements OnPreferenceChangeListener {
 
     private static final String LONG_PRESS_KILL_DELAY = "long_press_kill_delay";
+
+    private static final String NAVBAR_VISIBILITY = "navbar_visibility";
+
+    private SwitchPreference mNavbarVisibility;
 
     private CustomSeekBarPreference mLongpressKillDelay;
 
@@ -41,6 +47,14 @@ public class NavBarSettings extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.navbar_settings);
+        mNavbarVisibility = (SwitchPreference) findPreference(NAVBAR_VISIBILITY);
+
+        boolean showing = Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.NAVIGATION_BAR_VISIBLE,
+                DUActionUtils.hasNavbarByDefault(getActivity()) ? 1 : 0) != 0;
+        mNavbarVisibility.setChecked(showing);
+        mNavbarVisibility.setOnPreferenceChangeListener(this);
+
         PreferenceScreen prefScreen = getPreferenceScreen();
         ContentResolver resolver = getActivity().getContentResolver();
 
@@ -62,6 +76,12 @@ public class NavBarSettings extends SettingsPreferenceFragment
         if (preference == mLongpressKillDelay) {
             int killconf = (Integer) newValue;
             Settings.System.putInt(resolver, Settings.System.LONG_PRESS_KILL_DELAY, killconf);
+            return true;
+        } else if (preference.equals(mNavbarVisibility)) {
+            boolean showing = ((Boolean)newValue);
+            Settings.Secure.putInt(getContentResolver(), Settings.Secure.NAVIGATION_BAR_VISIBLE,
+                    showing ? 1 : 0);
+            mNavbarVisibility.setChecked(showing);
             return true;
         }
         return false;
