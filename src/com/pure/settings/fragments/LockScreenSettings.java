@@ -43,7 +43,7 @@ public class LockScreenSettings extends SettingsPreferenceFragment {
     private static final String KEYGUARD_TORCH = "keyguard_toggle_torch";
     private static final String FINGERPRINT_VIB = "fingerprint_success_vib";
     private static final String FP_UNLOCK_KEYSTORE = "fp_unlock_keystore";
-    private static final String LOCKSCREEN_CHARGING = "lockscreen_charging_current";
+    private static final String LOCKSCREEN_BATTERY_INFO = "lockscreen_battery_info";
 
     private FingerprintManager mFingerprintManager;
 
@@ -80,7 +80,7 @@ public class LockScreenSettings extends SettingsPreferenceFragment {
             prefScreen.removePreference(secureCategory);
         }
 
-        mLockscreenCharging = (SystemSettingSwitchPreference) findPreference(LOCKSCREEN_CHARGING);
+        mLockscreenCharging = (SystemSettingSwitchPreference) findPreference(LOCKSCREEN_BATTERY_INFO);
         if (!resources.getBoolean(R.bool.showCharging)) {
             prefScreen.removePreference(mLockscreenCharging);
         }
