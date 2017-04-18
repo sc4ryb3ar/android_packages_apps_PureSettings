@@ -535,4 +535,9 @@
 
     <!-- OTA Updates-->
     <string name="ota_title">PureNexus updates</string>
+
+    <!-- Recents Membar -->
+    <string name="systemui_recents_mem_display_title">Show Memory Bar</string>
+    <string name="systemui_recents_mem_display_summaryOn">RAM bar enabled</string>
+    <string name="systemui_recents_mem_display_summaryOff">RAM bar disabled</string>
 </resources>
