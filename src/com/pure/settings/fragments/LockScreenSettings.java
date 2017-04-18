@@ -17,6 +17,7 @@
 package com.pure.settings.fragments;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -42,18 +43,21 @@ public class LockScreenSettings extends SettingsPreferenceFragment {
     private static final String KEYGUARD_TORCH = "keyguard_toggle_torch";
     private static final String FINGERPRINT_VIB = "fingerprint_success_vib";
     private static final String FP_UNLOCK_KEYSTORE = "fp_unlock_keystore";
+    private static final String LOCKSCREEN_CHARGING = "lockscreen_charging_current";
 
     private FingerprintManager mFingerprintManager;
 
     private SystemSettingSwitchPreference mLsTorch;
     private SystemSettingSwitchPreference mFingerprintVib;
     private SwitchPreference mFpKeystore;
+    private SystemSettingSwitchPreference mLockscreenCharging;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.lockscreen_settings);
         PreferenceScreen prefScreen = getPreferenceScreen();
+        Resources resources = getResources();
         final LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
 
         PreferenceCategory optionsCategory = (PreferenceCategory) findPreference(LS_OPTIONS_CAT);
@@ -74,6 +78,11 @@ public class LockScreenSettings extends SettingsPreferenceFragment {
 
         if (!lockPatternUtils.isSecure(MY_USER_ID)) {
             prefScreen.removePreference(secureCategory);
+        }
+
+        mLockscreenCharging = (SystemSettingSwitchPreference) findPreference(LOCKSCREEN_CHARGING);
+        if (!resources.getBoolean(R.bool.showCharging)) {
+            prefScreen.removePreference(mLockscreenCharging);
         }
     }
 
