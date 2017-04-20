@@ -17,11 +17,13 @@
 package com.pure.settings.fragments;
 
 import android.content.Context;
+import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -33,7 +35,10 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.pure.settings.utils.Utils;
 import com.pure.settings.preferences.SystemSettingSwitchPreference;
 
-public class LockScreenSettings extends SettingsPreferenceFragment {
+import android.provider.Settings;
+
+public class LockScreenSettings extends SettingsPreferenceFragment implements
+        Preference.OnPreferenceChangeListener {
 
     private static final int MY_USER_ID = UserHandle.myUserId();
 
@@ -50,7 +55,7 @@ public class LockScreenSettings extends SettingsPreferenceFragment {
     private SystemSettingSwitchPreference mLsTorch;
     private SystemSettingSwitchPreference mFingerprintVib;
     private SwitchPreference mFpKeystore;
-    private SystemSettingSwitchPreference mLockscreenCharging;
+    private SwitchPreference mLockscreenCharging;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,17 +79,42 @@ public class LockScreenSettings extends SettingsPreferenceFragment {
         if (!mFingerprintManager.isHardwareDetected()){
             secureCategory.removePreference(mFingerprintVib);
             secureCategory.removePreference(mFpKeystore);
+        }else{
+            mFpKeystore.setChecked((Settings.System.getInt(getContentResolver(),
+                Settings.System.FP_UNLOCK_KEYSTORE, 0) == 1));
+            mFpKeystore.setOnPreferenceChangeListener(this);
         }
 
         if (!lockPatternUtils.isSecure(MY_USER_ID)) {
             prefScreen.removePreference(secureCategory);
         }
 
-        mLockscreenCharging = (SystemSettingSwitchPreference) findPreference(LOCKSCREEN_BATTERY_INFO);
+        mLockscreenCharging = (SwitchPreference) findPreference(LOCKSCREEN_BATTERY_INFO);
         if (!resources.getBoolean(R.bool.showCharging)) {
             prefScreen.removePreference(mLockscreenCharging);
+        } else {
+        mLockscreenCharging.setChecked((Settings.System.getInt(getContentResolver(),
+                Settings.System.LOCKSCREEN_BATTERY_INFO, 0) == 1));
+        mLockscreenCharging.setOnPreferenceChangeListener(this);
         }
     }
+
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        ContentResolver resolver = getActivity().getContentResolver();
+        if (preference == mLockscreenCharging) {
+            boolean value = (Boolean) newValue;
+            Settings.System.putInt(resolver,
+                    Settings.System.LOCKSCREEN_BATTERY_INFO, value ? 1 : 0);
+            return true;
+        } else if (preference == mFpKeystore) {
+            boolean value = (Boolean) newValue;
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.FP_UNLOCK_KEYSTORE, value ? 1 : 0);
+            return true;
+        }
+        return false;
+    }
+
 
     @Override
     protected int getMetricsCategory() {
