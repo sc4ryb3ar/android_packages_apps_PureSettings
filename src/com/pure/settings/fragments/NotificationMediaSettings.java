@@ -34,11 +34,7 @@ import com.android.settings.SettingsPreferenceFragment;
 public class NotificationMediaSettings extends SettingsPreferenceFragment
          implements OnPreferenceChangeListener {
 
-    private static final String KEY_HEADS_UP_SETTINGS = "heads_up_settings";
-
     private static final String KEY_SHOW_TICKER = "status_bar_show_ticker";
-
-    private PreferenceScreen mHeadsUp;
 
     private ListPreference mTicker;
 
@@ -48,8 +44,6 @@ public class NotificationMediaSettings extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.notification_media_settings);
         PreferenceScreen prefScreen = getPreferenceScreen();
 
-        mHeadsUp = (PreferenceScreen) findPreference(KEY_HEADS_UP_SETTINGS);
-
         mTicker = (ListPreference) findPreference(KEY_SHOW_TICKER);
         mTicker.setOnPreferenceChangeListener(this);
         int tickerMode = Settings.System.getIntForUser(getContentResolver(),
@@ -57,25 +51,6 @@ public class NotificationMediaSettings extends SettingsPreferenceFragment
                 0, UserHandle.USER_CURRENT);
         mTicker.setValue(String.valueOf(tickerMode));
         mTicker.setSummary(mTicker.getEntry());
-        boolean tickerEnabled = getTickerEnabled();
-        if (tickerEnabled) {
-            Settings.System.putIntForUser(getActivity().getContentResolver(), Settings.System.HEADS_UP_USER_ENABLED, 0, UserHandle.USER_CURRENT);
-            mHeadsUp.setSummary(R.string.summary_heads_up_disabled);
-            mHeadsUp.setEnabled(false);
-        }else{
-            mHeadsUp.setEnabled(true);
-            mHeadsUp.setSummary(getUserHeadsUpState() ? R.string.summary_heads_up_enabled : R.string.summary_heads_up_disabled);
-        }
-    }
-
-    private boolean getTickerEnabled() {
-         return Settings.System.getInt(getContentResolver(),Settings.System.STATUS_BAR_SHOW_TICKER,0) != 0;
-    }
-
-    private boolean getUserHeadsUpState() {
-         return Settings.System.getInt(getContentResolver(),
-                Settings.System.HEADS_UP_USER_ENABLED,
-                Settings.System.HEADS_UP_USER_ON) != 0;
     }
 
     @Override
@@ -88,14 +63,6 @@ public class NotificationMediaSettings extends SettingsPreferenceFragment
         ContentResolver resolver = getActivity().getContentResolver();
         if (preference == mTicker) {
             int tickerMode = Integer.parseInt(((String) newValue).toString());
-            if (tickerMode != 0) {
-                Settings.System.putIntForUser(resolver, Settings.System.HEADS_UP_USER_ENABLED, 0, UserHandle.USER_CURRENT);
-                mHeadsUp.setSummary(R.string.summary_heads_up_disabled);
-                mHeadsUp.setEnabled(false);
-            }else{
-                mHeadsUp.setEnabled(true);
-                mHeadsUp.setSummary(getUserHeadsUpState() ? R.string.summary_heads_up_enabled : R.string.summary_heads_up_disabled);
-            }
             Settings.System.putIntForUser(getContentResolver(),
                     Settings.System.STATUS_BAR_SHOW_TICKER, tickerMode,
                     UserHandle.USER_CURRENT);
@@ -109,14 +76,5 @@ public class NotificationMediaSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        boolean tickerEnabled = getTickerEnabled();
-        if (tickerEnabled) {
-            Settings.System.putIntForUser(getActivity().getContentResolver(), Settings.System.HEADS_UP_USER_ENABLED, 0, UserHandle.USER_CURRENT);
-            mHeadsUp.setSummary(R.string.summary_heads_up_disabled);
-            mHeadsUp.setEnabled(false);
-        }else{
-            mHeadsUp.setEnabled(true);
-            mHeadsUp.setSummary(getUserHeadsUpState() ? R.string.summary_heads_up_enabled : R.string.summary_heads_up_disabled);
-        }
     }
 }
