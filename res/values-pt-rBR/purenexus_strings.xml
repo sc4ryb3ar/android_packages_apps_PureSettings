@@ -285,7 +285,7 @@
   <string name="power_menu_sound_title">Painel de som</string>
   <string name="power_menu_bug_report_disabled">Relatório de erros está desabilitado nas configurações de desenvolvedor</string>
   <!-- Power menu on secure lockscreen -->
-  <string name="lockscreen_enable_power_menu_title">Exibir o menu de energia na tela bloqueo</string>
+  <string name="lockscreen_enable_power_menu_title">Exibir o menu de energia na tela de bloqueio</string>
   <!-- Recent Apps fragment -->
   <string name="recent_settings_title">Aplicativos recentes</string>
   <!-- Recent clear all button and location -->
