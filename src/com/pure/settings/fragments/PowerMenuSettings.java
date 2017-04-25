@@ -39,7 +39,6 @@ import com.pure.settings.preferences.SystemSettingSwitchPreference;
 import com.android.internal.util.purenexus.PowerMenuConstants;
 import static com.android.internal.util.purenexus.PowerMenuConstants.*;
 
-import com.android.internal.widget.LockPatternUtils;
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -77,16 +76,11 @@ public class PowerMenuSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.powermenu_settings);
         mContext = getActivity().getApplicationContext();
         final PreferenceScreen prefScreen = getPreferenceScreen();
-        final LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
 
         final PreferenceCategory actionCategory =
                 (PreferenceCategory) prefScreen.findPreference(ACTION_CATEGORY);
         final PreferenceCategory powerCategory =
                 (PreferenceCategory) prefScreen.findPreference(POWER_CATEGORY);
-
-        if (!lockPatternUtils.isSecure(MY_USER_ID)) {
-            prefScreen.removePreference(powerCategory);
-        }
 
 		// power items
         mAvailableActions = getActivity().getResources().getStringArray(

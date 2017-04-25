@@ -31,7 +31,6 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.internal.widget.LockPatternUtils;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -79,7 +78,6 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment imple
         addPreferencesFromResource(R.xml.notification_drawer_settings);
         PreferenceScreen prefScreen = getPreferenceScreen();
         ContentResolver resolver = getActivity().getContentResolver();
-        final LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
 
         PreferenceCategory qscat = (PreferenceCategory) findPreference(QS_CAT);
 
@@ -98,9 +96,6 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment imple
         updateSmartPulldownSummary(smartPulldown);
 
         mQsLock = (SecureSettingSwitchPreference) prefScreen.findPreference(PREF_QSLOCK);
-        if (!lockPatternUtils.isSecure(MY_USER_ID)) {
-            qscat.removePreference(mQsLock);
-        }
 
         mQsColumns = (CustomSeekBarPreference) findPreference(PREF_COLUMNS);
         int columnsQs = Settings.System.getInt(resolver,
