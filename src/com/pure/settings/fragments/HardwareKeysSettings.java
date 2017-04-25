@@ -138,8 +138,12 @@ public class HardwareKeysSettings extends ActionFragment implements OnPreference
 
          // Button Backlight
         if (!hasMenuKey || !hasHomeKey) {
-             prefScreen.removePreference(mBacklightTimeout);
-             prefScreen.removePreference(mButtonBrightness);
+            if (mBacklightTimeout != null) {
+                prefScreen.removePreference(mBacklightTimeout);
+            }
+            if (mButtonBrightness != null) {
+                prefScreen.removePreference(mButtonBrightness);
+            }
          }
          
         // back key
