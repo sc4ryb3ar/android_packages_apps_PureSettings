@@ -513,4 +513,8 @@
   <!-- Lockscreen battery info indicator  -->
   <string name="lockscreen_battery_info_title">Informação de carregamento na tela de bloqueio</string>
   <string name="lockscreen_battery_info_summary">Exibir corrente/tensão máxima e temperatura da bateria na tela de bloqueio durante o carregamento</string>
+  <!-- Wired headset ringtone audio focus -->
+  <string name="wired_ringtone_focus_mode_title">Reproduzir ringtones via</string>
+  <string name="wired_ringtone_focus_mode_dynamic">Fones de ouvido com fio, se conectado e reproduzindo música</string>
+  <string name="wired_ringtone_focus_mode_stock">Alto-falante e fones de ouvido (padrão)</string>
 </resources>
