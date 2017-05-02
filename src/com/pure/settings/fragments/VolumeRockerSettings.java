@@ -34,7 +34,9 @@ public class VolumeRockerSettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
     private static final String SCREENRECORD_CHORD_TYPE = "screenrecord_chord_type";
+    private static final String WIRED_RINGTONE_FOCUS_MODE = "wired_ringtone_focus_mode";
 
+    private ListPreference mWiredHeadsetRingtoneFocus;
     private ListPreference mVolumeKeyCursorControl;
     private ListPreference mScreenrecordChordType;
 
@@ -54,6 +56,13 @@ public class VolumeRockerSettings extends SettingsPreferenceFragment implements
                 Settings.System.SCREENRECORD_CHORD_TYPE, 0);
         mScreenrecordChordType = initActionList(SCREENRECORD_CHORD_TYPE,
                 recordChordValue);
+
+        mWiredHeadsetRingtoneFocus = (ListPreference) findPreference(WIRED_RINGTONE_FOCUS_MODE);
+        int mWiredHeadsetRingtoneFocusValue = Settings.Global.getInt(resolver,
+                Settings.Global.WIRED_RINGTONE_FOCUS_MODE, 1);
+        mWiredHeadsetRingtoneFocus.setValue(Integer.toString(mWiredHeadsetRingtoneFocusValue));
+        mWiredHeadsetRingtoneFocus.setSummary(mWiredHeadsetRingtoneFocus.getEntry());
+        mWiredHeadsetRingtoneFocus.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -78,6 +87,7 @@ public class VolumeRockerSettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        ContentResolver resolver = getActivity().getContentResolver();
         if (preference == mVolumeKeyCursorControl) {
             handleActionListChange(mVolumeKeyCursorControl, newValue,
                     Settings.System.VOLUME_KEY_CURSOR_CONTROL);
@@ -85,6 +95,14 @@ public class VolumeRockerSettings extends SettingsPreferenceFragment implements
         } else if  (preference == mScreenrecordChordType) {
             handleActionListChange(mScreenrecordChordType, newValue,
                     Settings.System.SCREENRECORD_CHORD_TYPE);
+            return true;
+        } else if (preference == mWiredHeadsetRingtoneFocus) {
+            int mWiredHeadsetRingtoneFocusValue = Integer.valueOf((String) newValue);
+            int index = mWiredHeadsetRingtoneFocus.findIndexOfValue((String) newValue);
+            mWiredHeadsetRingtoneFocus.setSummary(
+                    mWiredHeadsetRingtoneFocus.getEntries()[index]);
+            Settings.Global.putInt(resolver, Settings.Global.WIRED_RINGTONE_FOCUS_MODE,
+                    mWiredHeadsetRingtoneFocusValue);
             return true;
         }
         return false;

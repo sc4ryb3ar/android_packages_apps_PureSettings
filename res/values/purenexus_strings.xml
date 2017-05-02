@@ -548,4 +548,9 @@
     <!-- Lockscreen battery info indicator  -->
     <string name="lockscreen_battery_info_title">Lockscreen charging info</string>
     <string name="lockscreen_battery_info_summary">Display negociated charger max current and voltage and battery temperature on lockscreen while charging</string>
+
+    <!-- Wired headset ringtone audio focus -->
+    <string name="wired_ringtone_focus_mode_title">Where to play ringtones from</string>
+    <string name="wired_ringtone_focus_mode_dynamic">Wired headset if connected and playing music</string>
+    <string name="wired_ringtone_focus_mode_stock">Speakerphone (default)</string>
 </resources>
