@@ -18,15 +18,25 @@ package com.pure.settings;
 
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceScreen;
+import android.content.res.Resources;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.internal.utils.du.DUActionUtils;
 
 public class PureSettings extends SettingsPreferenceFragment {
 
     private static final String CATEGORY_HWKEY = "pure_hardware_keys_settings";
+
+    // Masks for checking presence of hardware keys.
+    // Must match values in frameworks/base/core/res/res/values/config.xml
+    public static final int KEY_MASK_HOME = 0x01;
+    public static final int KEY_MASK_BACK = 0x02;
+    public static final int KEY_MASK_MENU = 0x04;
+    public static final int KEY_MASK_ASSIST = 0x08;
+    public static final int KEY_MASK_APP_SWITCH = 0x10;
+    public static final int KEY_MASK_CAMERA = 0x20;
+    public static final int KEY_MASK_VOLUME = 0x40;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -34,8 +44,19 @@ public class PureSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.pure_settings_main);
         PreferenceScreen prefScreen = getPreferenceScreen();
         final PreferenceScreen hwkeyCat = (PreferenceScreen) prefScreen.findPreference(CATEGORY_HWKEY);
-        final boolean needsNavbar = DUActionUtils.hasNavbarByDefault(getActivity());
-        if (needsNavbar) {
+        
+        // bits for hardware keys present on device
+        final int deviceKeys = getResources().getInteger(
+                com.android.internal.R.integer.config_deviceHardwareKeys);
+
+        // read bits for present hardware keys
+        final boolean hasHomeKey = (deviceKeys & KEY_MASK_HOME) != 0;
+        final boolean hasBackKey = (deviceKeys & KEY_MASK_BACK) != 0;
+        final boolean hasMenuKey = (deviceKeys & KEY_MASK_MENU) != 0;
+        final boolean hasAssistKey = (deviceKeys & KEY_MASK_ASSIST) != 0;
+        final boolean hasAppSwitchKey = (deviceKeys & KEY_MASK_APP_SWITCH) != 0;
+
+        if (!hasHomeKey && !hasBackKey && !hasMenuKey && !hasAssistKey && !hasAppSwitchKey) { // no hwkeys, remove pref
             prefScreen.removePreference(hwkeyCat);
         }
     }
