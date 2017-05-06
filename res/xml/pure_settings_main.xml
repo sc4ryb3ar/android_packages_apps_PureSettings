@@ -89,6 +89,11 @@
             android:title="@string/misc_settings_title"/>
 
         <PreferenceScreen
+            android:fragment="com.pure.settings.fragments.Changelog"
+            android:key="pure_changelog"
+            android:title="@string/changelog_title"/>
+
+        <PreferenceScreen
             android:key="pure_ota"
             android:title="@string/ota_title">
             <intent android:action="android.intent.action.MAIN"

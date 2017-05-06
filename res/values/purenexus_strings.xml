@@ -553,4 +553,8 @@
     <string name="wired_ringtone_focus_mode_title">Where to play ringtones from</string>
     <string name="wired_ringtone_focus_mode_dynamic">Wired headset if connected and playing music</string>
     <string name="wired_ringtone_focus_mode_stock">Speakerphone (default)</string>
+
+    <!-- Changelog -->
+    <string name="changelog_title">Changelog</string>
+    <string name="changelog_error">Unable to load changelog</string>
 </resources>
