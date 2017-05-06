@@ -514,4 +514,9 @@
     <!-- Lockscreen battery info indicator  -->
    <string name="lockscreen_battery_info_title">Информация о зарядке</string>
    <string name="lockscreen_battery_info_summary">Отображение дополнительной информации о зарядке на экране блокировки</string>
+
+    <!-- Wired headset ringtone audio focus -->
+   <string name="wired_ringtone_focus_mode_title">Играть мелодию вызова через</string>
+   <string name="wired_ringtone_focus_mode_dynamic">Наушники, при включенной музыке</string>
+   <string name="wired_ringtone_focus_mode_stock">Динамик и наушники (по умолчанию)</string>
 </resources>
