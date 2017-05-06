@@ -519,4 +519,8 @@
    <string name="wired_ringtone_focus_mode_title">Играть мелодию вызова через</string>
    <string name="wired_ringtone_focus_mode_dynamic">Наушники, при включенной музыке</string>
    <string name="wired_ringtone_focus_mode_stock">Динамик и наушники (по умолчанию)</string>
+
+    <!-- Changelog -->
+    <string name="changelog_title">Список изменений</string>
+    <string name="changelog_error">Не удается загрузить список изменений</string>
 </resources>

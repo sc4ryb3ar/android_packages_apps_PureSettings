@@ -517,4 +517,7 @@
   <string name="wired_ringtone_focus_mode_title">Reproduzir ringtones via</string>
   <string name="wired_ringtone_focus_mode_dynamic">Fones de ouvido com fio, se conectado e reproduzindo música</string>
   <string name="wired_ringtone_focus_mode_stock">Alto-falante e fones de ouvido (padrão)</string>
+  <!-- Changelog -->
+  <string name="changelog_title">Lista de mudanças</string>
+  <string name="changelog_error">Falha ao carregar a lista de mudanças</string>
 </resources>
