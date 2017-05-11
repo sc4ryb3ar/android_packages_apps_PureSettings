@@ -90,8 +90,8 @@
   <string name="fprint_sucess_vib_title">Вибрировать при аутентификации по отпечатку пальца</string>
   <string name="fprint_sucess_vib_summary">Вибрировать при успешной аутентификации по отпечатку пальца</string>
   <!-- Fingerprint unlock keystore -->
-  <string name="fp_unlock_keystore_title">Fingerprint unlock</string>
-  <string name="fp_unlock_keystore_summary">Unlock device with fingerprint after reboot without pin/password/pattern\nNote: at your own risk!</string>
+  <string name="fp_unlock_keystore_title">Разблокировка отпечатком</string>
+  <string name="fp_unlock_keystore_summary">Разблокировать устройство после перезагрузки без PIN/Пароля/Граф. ключа.\nПрим.: Используйте на свой страх и риск!</string>
   <!-- Lockscreen items clock, date, alarm text -->
   <string name="lockscreen_items_settings_title">Элементы экрана блокировки</string>
   <string name="lockscreen_clock_title">Отображать часы</string>
