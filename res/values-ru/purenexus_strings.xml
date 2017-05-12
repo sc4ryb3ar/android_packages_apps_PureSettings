@@ -172,7 +172,7 @@
   <string name="navigation_bar_size_42_dp">42 dp</string>
   <string name="navigation_bar_size_0_dp">0 dp (выкл.)</string>
   <!-- Navbar tuner -->
-  <string name="navbar_tuner_title">NavBar тюнер</string>
+  <string name="navbar_tuner_title">Редактор панели навигации</string>
   <string name="navbar_tuner_summary">Настройка и расположение кнопок</string>
   <!-- One handed mode -->
   <string name="one_handed_mode_title">Режим одной руки</string>
