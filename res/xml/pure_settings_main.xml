@@ -93,14 +93,6 @@
             android:key="pure_changelog"
             android:title="@string/changelog_title"/>
 
-        <PreferenceScreen
-            android:key="pure_ota"
-            android:title="@string/ota_title">
-            <intent android:action="android.intent.action.MAIN"
-                    android:targetPackage="com.purenexus.ota"
-                    android:targetClass="com.purenexus.ota.UpdatesActivity" />
-        </PreferenceScreen>
-
     </PreferenceCategory>
 
 </PreferenceScreen>
